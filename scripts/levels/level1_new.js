@@ -8,6 +8,7 @@ class Level1 {
         this.isDragging = false;
         this.dragStartPos = { x: 0, y: 0 };
         this.droneInterval = null;
+        this.isTouchDevice = 'ontouchstart' in window;
     }
 
     start() {
@@ -19,12 +20,58 @@ class Level1 {
         
         this.setupEventListeners();
         this.startDroneSpawning();
+
+        // Prevent scrolling on touch devices
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.height = '100%';
     }
 
     setupEventListeners() {
-        // Mouse down event to start dragging
-        this.chakraElement.addEventListener('mousedown', (e) => {
+        // Touch Events
+        this.chakraElement.addEventListener('touchstart', (e) => {
             if (!this.isGameActive) return;
+            
+            this.isDragging = true;
+            const touch = e.touches[0];
+            const rect = this.chakraElement.getBoundingClientRect();
+            this.dragStartPos = {
+                x: touch.clientX - rect.left,
+                y: touch.clientY - rect.top
+            };
+            
+            this.chakraElement.querySelector('.chakra').style.transform = 'rotate(0deg)';
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!this.isDragging || !this.isGameActive) return;
+            
+            const touch = e.touches[0];
+            const gameRect = this.gameArea.getBoundingClientRect();
+            let newLeft = touch.clientX - gameRect.left - this.dragStartPos.x;
+            
+            newLeft = Math.max(0, Math.min(newLeft, gameRect.width - 50));
+            this.chakraElement.style.left = `${newLeft}px`;
+            
+            const rotation = (newLeft / gameRect.width) * 720;
+            this.chakraElement.querySelector('.chakra').style.transform = `rotate(${rotation}deg)`;
+            
+            e.preventDefault();
+        }, { passive: false });
+
+        document.addEventListener('touchend', (e) => {
+            if (!this.isDragging || !this.isGameActive) return;
+            
+            this.isDragging = false;
+            this.launchChakra();
+            e.preventDefault();
+        }, { passive: false });
+
+        // Mouse Events (keep existing mouse support)
+        this.chakraElement.addEventListener('mousedown', (e) => {
+            if (!this.isGameActive || this.isTouchDevice) return;
             
             this.isDragging = true;
             const rect = this.chakraElement.getBoundingClientRect();
@@ -33,32 +80,25 @@ class Level1 {
                 y: e.clientY - rect.top
             };
             
-            // Reset rotation when starting drag
             this.chakraElement.querySelector('.chakra').style.transform = 'rotate(0deg)';
-            
             e.preventDefault();
         });
 
-        // Mouse move event for dragging
         document.addEventListener('mousemove', (e) => {
-            if (!this.isDragging || !this.isGameActive) return;
+            if (!this.isDragging || !this.isGameActive || this.isTouchDevice) return;
             
             const gameRect = this.gameArea.getBoundingClientRect();
             let newLeft = e.clientX - gameRect.left - this.dragStartPos.x;
             
-            // Constrain horizontal movement
             newLeft = Math.max(0, Math.min(newLeft, gameRect.width - 50));
-            
             this.chakraElement.style.left = `${newLeft}px`;
             
-            // Rotate while dragging
             const rotation = (newLeft / gameRect.width) * 720;
             this.chakraElement.querySelector('.chakra').style.transform = `rotate(${rotation}deg)`;
         });
 
-        // Mouse up event to launch
         document.addEventListener('mouseup', (e) => {
-            if (!this.isDragging || !this.isGameActive) return;
+            if (!this.isDragging || !this.isGameActive || this.isTouchDevice) return;
             
             this.isDragging = false;
             this.launchChakra();

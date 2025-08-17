@@ -570,13 +570,68 @@
     }
     
     .brands-grid {
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
         gap: 1rem;
         padding: 1rem;
     }
 
     .brand-item {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
+        touch-action: none;
+    }
+
+    .game-area {
+        flex-direction: column;
+    }
+
+    .basket-container {
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    .basket-drop-zone {
+        height: 200px;
+    }
+
+    .game-instructions {
+        padding: 0.5rem;
+    }
+
+    .game-instructions li {
+        font-size: 0.8rem;
+        min-width: unset;
+        flex: 1 1 100%;
+    }
+
+    .victory-content {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .victory-left {
+        border-right: none;
+        border-bottom: 2px solid #f0f0f0;
+        padding-right: 0;
+        padding-bottom: 1rem;
+    }
+
+    .victory-right {
+        padding-left: 0;
+        padding-top: 1rem;
+    }
+
+    .score-display {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    #brandCount {
+        font-size: 1.1rem;
+    }
+
+    .game-header h1 {
+        font-size: 1.3rem;
     }
 }

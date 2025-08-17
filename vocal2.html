@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Level 2 - Vocal for Local</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vocal-new.css">
+    <link rel="stylesheet" href="mobile.css">
+    <script src="scripts/mobile-utils.js"></script>
     <script src="scripts/audio-controls.js"></script>
     <script src="scripts/progress-new.js"></script>
     <style>
@@ -158,6 +160,99 @@
                     img.src = brand.image;
                     img.alt = brand.id;
                     img.draggable = false;
+
+                    // Touch event handlers
+                    let isDragging = false;
+                    let currentX;
+                    let currentY;
+                    let initialX;
+                    let initialY;
+                    let xOffset = 0;
+                    let yOffset = 0;
+                    let dragStarted = false;
+
+                    function handleTouchStart(e) {
+                        initialX = e.touches[0].clientX - xOffset;
+                        initialY = e.touches[0].clientY - yOffset;
+                        
+                        if (e.target === brandElement || e.target === img) {
+                            isDragging = true;
+                            brandElement.classList.add('dragging');
+                            
+                            // Create a clone for dragging
+                            const clone = brandElement.cloneNode(true);
+                            clone.id = 'dragging-clone';
+                            clone.style.position = 'fixed';
+                            clone.style.opacity = '0.8';
+                            clone.style.pointerEvents = 'none';
+                            clone.style.zIndex = '1000';
+                            document.body.appendChild(clone);
+                        }
+                    }
+
+                    function handleTouchMove(e) {
+                        if (isDragging) {
+                            e.preventDefault();
+                            
+                            currentX = e.touches[0].clientX - initialX;
+                            currentY = e.touches[0].clientY - initialY;
+                            
+                            const clone = document.getElementById('dragging-clone');
+                            if (clone) {
+                                clone.style.transform = `translate3d(${currentX}px, ${currentY}px, 0)`;
+                            }
+
+                            // Check if over basket
+                            const basket = document.getElementById('localBasket');
+                            const basketRect = basket.getBoundingClientRect();
+                            const touch = e.touches[0];
+
+                            if (touch.clientX >= basketRect.left && 
+                                touch.clientX <= basketRect.right && 
+                                touch.clientY >= basketRect.top && 
+                                touch.clientY <= basketRect.bottom) {
+                                basket.classList.add('drag-over');
+                            } else {
+                                basket.classList.remove('drag-over');
+                            }
+                        }
+                    }
+
+                    function handleTouchEnd(e) {
+                        if (!isDragging) return;
+                        
+                        const clone = document.getElementById('dragging-clone');
+                        if (clone) {
+                            document.body.removeChild(clone);
+                        }
+
+                        const basket = document.getElementById('localBasket');
+                        const basketRect = basket.getBoundingClientRect();
+                        const lastTouch = e.changedTouches[0];
+
+                        if (lastTouch.clientX >= basketRect.left && 
+                            lastTouch.clientX <= basketRect.right && 
+                            lastTouch.clientY >= basketRect.top && 
+                            lastTouch.clientY <= basketRect.bottom) {
+                            
+                            // Simulate drop event
+                            const event = new Event('drop');
+                            event.dataTransfer = {
+                                getData: () => brand.id
+                            };
+                            basket.dispatchEvent(event);
+                        }
+
+                        isDragging = false;
+                        dragStarted = false;
+                        brandElement.classList.remove('dragging');
+                        basket.classList.remove('drag-over');
+                    }
+
+                    // Add touch event listeners
+                    brandElement.addEventListener('touchstart', handleTouchStart, { passive: false });
+                    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+                    document.addEventListener('touchend', handleTouchEnd);
                     
                     img.onerror = () => {
                         console.error(`Failed to load image: ${brand.image}`);
