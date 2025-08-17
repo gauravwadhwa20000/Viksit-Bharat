@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Mission Viksit Bharat — Interactive Game">
+    <meta name="theme-color" content="#0066CC">
+    <title>Mission Viksit Bharat — Decode the Future</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="home-page" id="homePage">
+        <div class="ashoka-chakra-bg"></div>
+        <h1>Mission Viksit Bharat — Decode the Future</h1>
+        
+        <!-- About Section -->
+        <section class="about-section" style="padding: 2rem; text-align: center; background: #fff; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin: 2rem auto; max-width: 800px;">
+            <h2 style="color: #0066CC; font-size: 2.5rem; margin-bottom: 1.5rem;">About</h2>
+            <div style="color: #333; font-size: 1.2rem; line-height: 1.6;">
+                <p style="margin-bottom: 1.5rem;">
+                    Celebrate India's 79th Independence Day by unlocking the Top 3 announcements from PM Modi's 2025 speech through fun, interactive challenges that blend learning with play.
+                </p>
+                <p style="margin-bottom: 1.5rem;">
+                    Start your mission to unlock the full vision of Viksit Bharat 2047!
+                </p>
+            </div>
+            <button id="startMissionBtn" class="primary-btn" style="background: #FF9933; color: white; border: none; padding: 1rem 2.5rem; font-size: 1.2rem; border-radius: 30px; cursor: pointer; transition: transform 0.2s; margin-top: 1rem;">
+                Start Your Mission
+            </button>
+        </section>
+
+        <!-- PM Quote Section -->
+        <div class="welcome-block" style="margin-top: 2rem;">
+            <p class="pm-greeting" style="font-size: 1.3rem; color: #333; font-style: italic; line-height: 1.8;">
+                "Viksit Bharat is not just a resolution, it's our responsibility. Together, we will build a nation that leads with innovation, thrives on self-reliance, and inspires the world with its achievements."
+            </p>
+            <div style="text-align: right; margin-top: 1rem;">
+                <p style="color: #0066CC; font-weight: 600; margin: 0.5rem 0;">Narendra Modi</p>
+                <p style="color: #666; font-size: 0.9rem;">Prime Minister of India</p>
+            </div>
+
+            <!-- Disclaimer Button -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button id="disclaimerBtn" style="background: transparent; color: #666; border: 1px solid #666; padding: 0.5rem 1.5rem; font-size: 0.9rem; border-radius: 20px; cursor: pointer; transition: all 0.3s ease;">
+                    Disclaimer
+                </button>
+            </div>
+        </div>
+
+        <div class="sound-control">
+            <button id="toggleSound" class="icon-btn">
+                <img src="assets/sound-off.svg" alt="Toggle Sound" id="soundIcon">
+            </button>
+        </div>
+
+        <!-- Disclaimer Popup -->
+        <div id="disclaimerPopup" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 600px; width: 90%; z-index: 1000;">
+            <div style="position: relative;">
+                <h3 style="color: #0066CC; margin-bottom: 1rem;">Disclaimer</h3>
+                <p style="color: #333; line-height: 1.6; margin-bottom: 1.5rem;">
+                    This game is created solely for educational and awareness purposes to help players learn about key public announcements made by the Government of India. All information presented here is sourced from publicly available content. This page is a private, non-official project and is not affiliated with or endorsed by any government body. Any resemblance to official websites, communications, or symbols is purely for thematic learning purposes.
+                </p>
+                <button id="closeDisclaimer" style="position: absolute; top: -1rem; right: -1rem; background: #FF9933; color: white; border: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                    ×
+                </button>
+            </div>
+        </div>
+
+        <!-- Overlay for Popup -->
+        <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 999;"></div>
+    </div>
+
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="assets/independence-theme.mp3.mp3" type="audio/mp3">
+        <source src="assets/independence-theme.mp3.mp3" type="audio/mpeg">
+        <p>Your browser does not support HTML5 audio. Here is a <a href="assets/independence-theme.mp3.mp3">link to the audio</a> instead.</p>
+    </audio>
+
+    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Disclaimer functionality
+        const disclaimerBtn = document.getElementById('disclaimerBtn');
+        const disclaimerPopup = document.getElementById('disclaimerPopup');
+        const closeDisclaimer = document.getElementById('closeDisclaimer');
+        const overlay = document.getElementById('overlay');
+
+        disclaimerBtn.addEventListener('click', () => {
+            disclaimerPopup.style.display = 'block';
+            overlay.style.display = 'block';
+        });
+
+        function closeDisclaimerPopup() {
+            disclaimerPopup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+
+        closeDisclaimer.addEventListener('click', closeDisclaimerPopup);
+        overlay.addEventListener('click', closeDisclaimerPopup);
+    </script>
+</body>
+</html>

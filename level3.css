@@ -1,0 +1,384 @@
+.level3-page {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.level-header {
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    z-index: 2;
+}
+
+.level-header h1 {
+    color: #0066CC;
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.level-header .instructions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.level-header .instructions strong {
+    color: #333;
+    margin-right: 1rem;
+}
+
+.level-header .instructions ol {
+    margin: 0;
+    padding: 0 0 0 1.5rem;
+    line-height: 1.6;
+    text-align: left;
+}
+
+.level-header .instructions li {
+    color: #333;
+}
+
+.tricolor-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.saffron-stripe {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 33.33%;
+    background-color: #FF9933;
+}
+
+.white-stripe {
+    position: absolute;
+    top: 33.33%;
+    width: 100%;
+    height: 33.33%;
+    background-color: #FFFFFF;
+}
+
+.green-stripe {
+    position: absolute;
+    top: 66.66%;
+    width: 100%;
+    height: 33.34%;
+    background-color: #138808;
+}
+
+.game-area {
+    width: 90%;
+    height: 450px;
+    position: relative;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    margin: 1rem auto;
+    overflow: hidden;
+    max-width: 800px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    z-index: 2;
+}
+
+.score-block {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    color: #0066CC;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.game-space {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.job-offer {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: #fff;
+    z-index: 5;
+}
+
+.falling {
+    animation: fall 4s linear forwards;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    cursor: default;
+    animation: fall 4s linear forwards;
+    z-index: 2;
+}
+
+.job-offer img {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 4px;
+}
+
+.job-seeker {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 120px;
+    cursor: move;
+    z-index: 3;
+    transition: left 0.1s ease-out;
+}
+
+.seeker-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.collected-jobs {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.collected-job {
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: collectPop 0.3s ease-out;
+}
+
+@keyframes fall {
+    0% { 
+        top: -60px;
+        transform: translateX(0);
+    }
+    100% { 
+        top: 100%;
+        transform: translateX(0);
+    }
+}
+
+@keyframes collectPop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Sound Control Styles */
+.sound-control .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+    transform: scale(1.1);
+}
+
+.icon-btn img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Victory Overlay Styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.overlay.visible {
+    opacity: 1;
+}
+
+.overlay.visible .victory-popup {
+    transform: scale(1);
+    opacity: 1;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.victory-popup {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    transform: scale(0.95);
+    opacity: 0;
+    transition: all 0.4s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.victory-title {
+    color: #0066CC;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.badge-info {
+    margin: 1.5rem 0;
+}
+
+.badge-title {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.badge-name {
+    color: #006400;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.fact-box {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+}
+
+.fact-title {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.fact-content {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.read-more-link {
+    color: #0066CC;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+.continue-btn {
+    background: #0066CC;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.continue-btn:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+}
+
+/* Show All Missions Button */
+.all-missions-button {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0066CC;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 10px rgba(0, 102, 204, 0.3);
+    z-index: 100;
+}
+
+.all-missions-button:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-space {
+        padding: 1rem;
+    }
+
+    .seeker-card, .job-card {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .victory-popup {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .victory-title {
+        font-size: 1.8rem;
+    }
+}

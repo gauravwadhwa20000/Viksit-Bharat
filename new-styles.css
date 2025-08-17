@@ -1,0 +1,199 @@
+.title-section {
+    text-align: center;
+    padding: 3rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.title-section h1 {
+    color: #0F52BA;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.title-section .subtitle {
+    font-size: 1.25rem;
+    color: #555;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.progress-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 900px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.progress-section h2 {
+    text-align: center;
+    color: #0F52BA;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+}
+
+.progress-bar {
+    background: rgba(15, 82, 186, 0.1);
+    height: 12px;
+    border-radius: 6px;
+    margin: 1rem 0 2rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    background: #0F52BA;
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-text {
+    position: absolute;
+    right: 0;
+    top: -25px;
+    font-size: 0.9rem;
+    color: #0F52BA;
+    font-weight: 500;
+}
+
+.mission-indicators {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    padding: 0 10px;
+}
+
+.indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(15, 82, 186, 0.2);
+    border: 2px solid #0F52BA;
+    transition: all 0.3s ease;
+}
+
+.indicator.completed .indicator-dot {
+    background: #0F52BA;
+}
+
+.indicator-label {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.missions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.mission-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+}
+
+.mission-card:hover {
+    transform: translateY(-5px);
+}
+
+.mission-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+}
+
+.mission-content img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.mission-content h3 {
+    color: #0F52BA;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.mission-desc {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.play-btn {
+    background: #0F52BA;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.play-btn:hover {
+    background: #0d47a1;
+    transform: scale(1.02);
+}
+
+.play-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+@media (max-width: 768px) {
+    .title-section h1 {
+        font-size: 2rem;
+    }
+
+    .title-section .subtitle {
+        font-size: 1.1rem;
+    }
+
+    .missions-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .mission-indicators {
+        display: none;
+    }
+
+    .progress-bar {
+        height: 8px;
+    }
+}

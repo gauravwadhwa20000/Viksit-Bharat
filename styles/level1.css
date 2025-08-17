@@ -1,0 +1,136 @@
+.level-1 {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(to bottom, #1a1a2e 0%, #16213e 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.score {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.back-btn {
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.back-btn:hover {
+    transform: scale(1.05);
+}
+
+.game-area {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.monuments-container {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10%;
+}
+
+.monument {
+    width: 100px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: filter 0.3s;
+}
+
+.monument.damaged {
+    filter: brightness(50%) sepia(100%) saturate(10000%) hue-rotate(0deg);
+}
+
+.india-gate {
+    background-image: url('../assets/india-gate.svg');
+}
+
+.taj-mahal {
+    background-image: url('../assets/taj-mahal.svg');
+}
+
+.red-fort {
+    background-image: url('../assets/red-fort.svg');
+}
+
+.chakra-launcher {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.chakra {
+    width: 100%;
+    height: 100%;
+    animation: spin 2s linear infinite;
+}
+
+.chakra-projectile {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('../assets/sudarshan-chakra.svg');
+    background-size: contain;
+}
+
+.drone {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('../assets/drone.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .monuments-container {
+        padding: 0 5%;
+    }
+
+    .monument {
+        width: 80px;
+        height: 120px;
+    }
+
+    .chakra-launcher {
+        width: 50px;
+        height: 50px;
+    }
+}

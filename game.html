@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission Viksit Bharat — Game Screen</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="updated-styles.css">
+    <link rel="stylesheet" href="level1.css">
+    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/progress-new.js"></script>
+    <script src="scripts/levels/level1.js"></script>
+</head>
+<body>
+    <div class="game-page">
+        <!-- Back to Home Button -->
+        <button onclick="window.location.href='index.html'" class="back-home-btn">
+            Back to Home
+        </button>
+        <!-- Section 1: Heading and Subheading -->
+        <section class="game-header-section" style="padding: 2.5rem 0 1.5rem 0; text-align: center;">
+            <h1 style="color: #0F52BA; font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem;">Mission Viksit Bharat — Decode the Future</h1>
+            <p style="font-size: 1.15rem; color: #444; max-width: 600px; margin: 0 auto;">Complete all 3 missions to help build a Viksit Bharat! Choose any mission to start your journey.</p>
+        </section>
+
+
+
+
+        <section class="levels-section" style="max-width: 1100px; margin: 0 auto;">
+            <div class="levels-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div class="level-block" style="background: #fff; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; position: relative;">
+                    <div class="completion-badge" style="display: none; position: absolute; top: 1rem; right: 1rem; background: #4CAF50; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">✓ Completed</div>
+                    <img src="assets/mission1.png" alt="Mission Sudarshan Chakra" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 1.2rem;">
+                    <h3 style="color: #0F52BA; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.7rem;">Mission Sudarshan Chakra</h3>
+                    <p style="color: #444; font-size: 0.98rem; text-align: center; margin-bottom: 1.2rem;">Protect India's monuments from drone attacks using the legendary Sudarshan Chakra.</p>
+                    <button class="play-btn level-btn" data-level="1" style="background: #0F52BA; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; margin-top: auto;">Play Mission</button>
+                </div>
+                <div class="level-block" style="background: #fff; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; position: relative;">
+                    <div class="completion-badge" style="display: none; position: absolute; top: 1rem; right: 1rem; background: #4CAF50; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">✓ Completed</div>
+                    <img src="assets/mission2.webp" alt="Vocal for Local" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 1.2rem;">
+                    <h3 style="color: #0F52BA; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.7rem;">Vocal for Local</h3>
+                    <p style="color: #444; font-size: 0.98rem; text-align: center; margin-bottom: 1.2rem;">Support local businesses and promote Made in India products by identifying Indian brands.</p>
+                    <button class="play-btn level-btn" data-level="2" style="background: #0F52BA; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; margin-top: auto;">Play Mission</button>
+                </div>
+                <div class="level-block" style="background: #fff; border-radius: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center; position: relative;">
+                    <div class="completion-badge" style="display: none; position: absolute; top: 1rem; right: 1rem; background: #4CAF50; color: white; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.9rem;">✓ Completed</div>
+                    <img src="assets/mission3.png" alt="PM Viksit Bharat Rozgaar Yojana" style="width: 120px; height: 120px; object-fit: contain; margin-bottom: 1.2rem;">
+                    <h3 style="color: #0F52BA; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.7rem;">PM Viksit Bharat Rozgaar Yojana</h3>
+                    <p style="color: #444; font-size: 0.98rem; text-align: center; margin-bottom: 1.2rem;">Create job opportunities and boost employment across India.</p>
+                    <button class="play-btn level-btn" data-level="3" style="background: #0F52BA; color: #fff; border: none; border-radius: 6px; padding: 0.7rem 1.3rem; font-size: 1rem; font-weight: 500; cursor: pointer; margin-top: auto;">Play Mission</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="sound-control">
+            <button id="toggleSound" class="icon-btn">
+                <img src="assets/sound-on.svg" alt="Toggle Sound" id="soundIcon">
+            </button>
+        </div>
+    </div>
+
+    <div id="gameContainer" class="game-container hidden">
+        <!-- Game levels will be dynamically loaded here -->
+    </div>
+
+    <!-- Congratulations Modal -->
+    <div id="congratsModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>🎉 Congratulations! 🎉</h2>
+            
+            <div class="share-section">
+                <div id="achievement-card" class="achievement-card">
+                    <div class="achievement-content">
+                        <svg class="badge-icon-large" viewBox="0 0 24 24" width="80" height="80">
+                            <circle cx="12" cy="12" r="11" fill="#4CAF50"/>
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="white"/>
+                        </svg>
+                        <h3>Changemaker Badge Earned!</h3>
+                        <p>Successfully completed all missions in Mission Viksit Bharat</p>
+                        <p class="achievement-holder">Awarded to: <span class="holder-name">Enter your name</span></p>
+                        <p class="achievement-date"></p>
+                        <div class="achievement-footer">
+                            <span>#ViksitBharat2047</span>
+                            <svg class="chakra-icon" viewBox="0 0 24 24" width="24" height="24">
+                                <circle cx="12" cy="12" r="12" fill="#000066" opacity="0.7"/>
+                                <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z" fill="#ffffff"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="share-options">
+                    <div class="name-input-section">
+                        <label for="achieverName">Enter your name for the badge:</label>
+                        <input type="text" id="achieverName" placeholder="Your name" maxlength="40">
+                    </div>
+                    <button onclick="downloadAchievement()" class="download-btn">
+                        Download Achievement
+                    </button>
+                    <div class="social-buttons">
+                        <button onclick="shareToTwitter()" class="social-btn twitter">
+                            Share on Twitter
+                        </button>
+                        <button onclick="shareToLinkedIn()" class="social-btn linkedin">
+                            Share on LinkedIn
+                        </button>
+                        <button onclick="shareToWhatsApp()" class="social-btn whatsapp">
+                            Share on WhatsApp
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-actions">
+                <button id="closeModal" class="close-btn">Close</button>
+            </div>
+            
+            <p class="reset-timer">Game will reset in <span id="resetTimer">30</span> seconds...</p>
+        </div>
+    </div>
+
+    <style>
+    .modal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .modal-content {
+        max-width: min(90vw, 800px);
+        width: 100%;
+        max-height: 90vh;
+        padding: 1.5rem;
+        margin: 1rem;
+        display: grid;
+        grid-template-rows: auto 1fr auto auto;
+        gap: 1rem;
+        overflow-y: auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-content h2 {
+        margin: 0;
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .achievement-card {
+        background: linear-gradient(135deg, #FF9933, #FFFFFF, #138808);
+        padding: 1rem;
+        border-radius: 15px;
+        margin: 0 auto;
+        width: 320px;
+        height: 420px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .achievement-content {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 400px;
+    }
+
+    .achievement-content h3 {
+        margin: 0.5rem 0;
+        font-size: 1.2rem;
+    }
+
+    .achievement-content p {
+        margin: 0.5rem 0;
+        font-size: 0.9rem;
+    }
+
+    .badge-icon-large {
+        width: 80px;
+        height: 80px;
+        margin: 0.5rem auto;
+    }
+
+    .achievement-date {
+        color: #666;
+        font-size: 0.8rem;
+        margin: 0.5rem 0;
+    }
+
+    .achievement-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #eee;
+    }
+
+    .chakra-icon {
+        width: 24px;
+        height: 24px;
+        opacity: 0.7;
+    }
+
+    .share-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        align-items: start;
+        justify-content: center;
+        padding: 0 1rem;
+    }
+
+    .share-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .social-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .social-btn, .download-btn {
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        white-space: nowrap;
+        border-radius: 8px;
+        transition: transform 0.2s;
+    }
+
+    .reset-timer {
+        background: #f8d7da;
+        color: #721c24;
+        padding: 0.75rem;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: 500;
+        margin: 1rem 0;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.8; }
+        100% { opacity: 1; }
+    }
+
+    .name-input-section {
+        background: #e8f4ff;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    .name-input-section label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #0F52BA;
+        font-weight: 500;
+    }
+
+    .name-input-section input {
+        width: 100%;
+        padding: 0.5rem;
+        border: 2px solid #0F52BA;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .name-input-section input:focus {
+        outline: none;
+        border-color: #FF9933;
+        box-shadow: 0 0 0 2px rgba(255, 153, 51, 0.2);
+    }
+
+    .achievement-holder {
+        color: #0F52BA;
+        font-weight: 500;
+        margin: 1rem 0;
+    }
+
+    .holder-name {
+        color: #FF9933;
+        font-style: italic;
+    }
+
+    .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: auto;
+        padding-bottom: 2rem;
+    }
+
+    @media (max-width: 768px) {
+        .modal-content {
+            padding: 1rem;
+            margin: 0.5rem;
+            gap: 0.75rem;
+        }
+
+        .share-section {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            padding: 0;
+        }
+
+        .achievement-card {
+            max-width: 300px;
+        }
+
+        .badge-icon-large {
+            width: 60px;
+            height: 60px;
+        }
+
+        .social-buttons {
+            margin-bottom: 2rem;
+        }
+
+        .reset-timer {
+            position: relative;
+            margin-top: 0.5rem;
+        }
+    }
+
+    .share-section h3, .download-section h3 {
+        color: #0F52BA;
+        margin-bottom: 0.5rem;
+    }
+
+    .social-buttons {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 1rem 0;
+    }
+
+    .social-btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 20px;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .social-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .twitter {
+        background: #1DA1F2;
+        position: relative;
+    }
+    .twitter::before {
+        content: '𝕏';
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    .linkedin {
+        background: #0077B5;
+        position: relative;
+    }
+    .linkedin::before {
+        content: 'in';
+        font-weight: bold;
+        margin-right: 8px;
+    }
+
+    .whatsapp {
+        background: #25D366;
+        position: relative;
+    }
+    .whatsapp::before {
+        content: '✆';
+        margin-right: 8px;
+    }
+
+    .download-btn {
+        background: #FF9933;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 25px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 1rem 0;
+        transition: all 0.2s ease;
+    }
+
+    .download-btn:hover {
+        transform: translateY(-2px);
+        background: #ff8c1a;
+    }
+
+    .download-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        opacity: 0.8;
+    }
+
+    .download-btn:not(:disabled):active {
+        transform: translateY(1px);
+    }
+
+    .download-note {
+        font-size: 0.8rem;
+        color: #666;
+        font-style: italic;
+    }
+    </style>
+
+    <script>
+    // Update name in preview when input changes
+    document.addEventListener('DOMContentLoaded', () => {
+        const nameInput = document.getElementById('achieverName');
+        if (nameInput) {
+            nameInput.addEventListener('input', function() {
+                const holderName = document.querySelector('.holder-name');
+                if (holderName) {
+                    holderName.textContent = this.value.trim() || 'Enter your name';
+                }
+            });
+        }
+    });
+
+    function shareToTwitter() {
+        const achieverName = document.getElementById('achieverName')?.value.trim() || 'a Changemaker';
+        const text = encodeURIComponent(`As ${achieverName}, I just completed all missions in Mission Viksit Bharat game! Join the journey to 2047! 🇮🇳 #ViksitBharat #MissionIndia`);
+        const url = encodeURIComponent(window.location.origin);
+        window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+    }
+
+    function shareToLinkedIn() {
+        const url = encodeURIComponent(window.location.origin);
+        const title = encodeURIComponent("Proud Changemaker for Viksit Bharat 2047 🇮🇳");
+        const text = encodeURIComponent("Excited to share that I've earned the Changemaker Badge in Mission Viksit Bharat! This interactive journey has shown me how we can contribute to India's vision for 2047. Join the mission and be part of India's transformative journey!\n\n#ViksitBharat2047 #ChangemakerBadge #DigitalIndia #NewIndia");
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&title=${title}&summary=${text}`, '_blank');
+    }
+
+    function shareToWhatsApp() {
+        const text = encodeURIComponent("I just completed all missions in Mission Viksit Bharat game! Join the journey to 2047! 🇮🇳 Play here: " + window.location.origin);
+        window.open(`https://wa.me/?text=${text}`, '_blank');
+    }
+
+    // Add html2canvas library with proper loading check
+    function loadHtml2Canvas() {
+        return new Promise((resolve, reject) => {
+            if (window.html2canvas) {
+                console.log('html2canvas already loaded');
+                resolve(window.html2canvas);
+                return;
+            }
+
+            const script = document.createElement('script');
+            script.src = 'https://html2canvas.hertzen.com/dist/html2canvas.min.js';
+            script.onload = () => {
+                console.log('html2canvas loaded successfully');
+                resolve(window.html2canvas);
+            };
+            script.onerror = (error) => {
+                console.error('Failed to load html2canvas:', error);
+                reject(new Error('Failed to load html2canvas'));
+            };
+            document.head.appendChild(script);
+        });
+    }
+
+    // Wait for fonts and DOM to be ready
+    function waitForRender() {
+        return new Promise(resolve => {
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(() => {
+                    // Add extra time for font rendering
+                    setTimeout(resolve, 300);
+                });
+            } else {
+                // Fallback if document.fonts is not supported
+                setTimeout(resolve, 500);
+            }
+        });
+    }
+
+    async function downloadAchievement() {
+        try {
+            const downloadBtn = document.querySelector('.download-btn');
+            if (!downloadBtn) {
+                console.error('Download button not found');
+                return;
+            }
+            
+            downloadBtn.disabled = true;
+            downloadBtn.textContent = 'Preparing...';
+
+            // Load html2canvas if not already loaded
+            await loadHtml2Canvas();
+            console.log('HTML2Canvas loaded successfully');
+
+            // Get the original card
+            const card = document.getElementById('achievement-card');
+            if (!card) {
+                throw new Error('Achievement card not found');
+            }
+
+            // Create a temporary container
+            const container = document.createElement('div');
+            container.style.position = 'fixed';
+            container.style.left = '-9999px';
+            container.style.top = '0';
+            container.style.width = '800px';
+            container.style.height = '1000px';
+            container.style.backgroundColor = 'white';
+            container.style.margin = '0';
+            container.style.padding = '0';
+            container.style.overflow = 'hidden';
+            container.style.display = 'block';
+            container.style.fontFamily = '"Poppins", sans-serif';
+            document.body.appendChild(container);
+
+            // Ensure fonts are loaded
+            await document.fonts.ready;
+            console.log('Fonts loaded successfully');
+
+            // Get the user's name
+            const nameInput = document.getElementById('achieverName');
+            const achieverName = (nameInput && nameInput.value.trim()) || 'Proud Changemaker';
+            console.log('Using name:', achieverName);
+
+            // Create the capture card with fixed dimensions and styling
+            const captureCard = document.createElement('div');
+            captureCard.style.cssText = `
+                width: 800px;
+                height: 1000px;
+                background: linear-gradient(135deg, #FF9933 0%, #FFFFFF 50%, #138808 100%);
+                padding: 32px;
+                border-radius: 24px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+                font-family: 'Poppins', sans-serif;
+                position: relative;
+                box-sizing: border-box;
+            `;
+            
+            // Force layout recalculation
+            captureCard.offsetHeight;
+
+            // Create the inner content
+            captureCard.innerHTML = `
+                <div style="
+                    background: white;
+                    padding: 48px;
+                    border-radius: 20px;
+                    height: calc(100% - 64px);
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: space-between;
+                    text-align: center;
+                    box-shadow: inset 0 0 40px rgba(15, 82, 186, 0.05);
+                ">
+                    <div style="width: 180px; height: 180px; margin: 20px auto; position: relative;">
+                        <div style="position: absolute; width: 100%; height: 100%; background: radial-gradient(circle, rgba(15, 82, 186, 0.1) 0%, transparent 70%);"></div>
+                        <svg viewBox="0 0 24 24" width="100%" height="100%" style="filter: drop-shadow(0 4px 8px rgba(76, 175, 80, 0.3));">
+                            <circle cx="12" cy="12" r="11" fill="#4CAF50"/>
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="white"/>
+                        </svg>
+                    </div>
+
+                    <div style="margin: 30px 0;">
+                        <h1 style="
+                            color: #0F52BA;
+                            font-size: 56px;
+                            font-weight: 700;
+                            margin: 0 0 20px 0;
+                            line-height: 1.2;
+                            text-shadow: 2px 2px 0 rgba(15, 82, 186, 0.1);
+                        ">Changemaker<br>Badge Earned!</h1>
+                        
+                        <p style="
+                            font-size: 28px;
+                            color: #444;
+                            margin: 20px 0;
+                            line-height: 1.4;
+                            letter-spacing: 0.02em;
+                        ">Successfully completed all missions<br>in Mission Viksit Bharat</p>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p style="
+                            color: #0F52BA;
+                            font-size: 32px;
+                            font-weight: 600;
+                            margin: 0 0 12px 0;
+                            letter-spacing: 0.02em;
+                        ">Awarded to</p>
+                        <p style="
+                            color: #FF9933;
+                            font-size: 42px;
+                            font-weight: 700;
+                            font-style: italic;
+                            margin: 0;
+                        ">${achieverName}</p>
+                    </div>
+
+                    <div style="margin: 15px 0;">
+                        <p class="achievement-date" style="
+                            color: #666;
+                            font-size: 22px;
+                            margin: 0;
+                            letter-spacing: 0.02em;
+                            font-weight: 500;
+                        "></p>
+                    </div>
+
+                    <div style="
+                        margin-top: 30px;
+                        padding-top: 24px;
+                        border-top: 2px solid rgba(15, 82, 186, 0.1);
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        position: relative;
+                    ">
+                        <div style="
+                            position: absolute;
+                            top: -1px;
+                            left: 0;
+                            width: 100%;
+                            height: 2px;
+                            background: linear-gradient(90deg, #FF9933, #138808);
+                            opacity: 0.3;
+                        "></div>
+                        <span style="
+                            font-weight: 700;
+                            color: #0F52BA;
+                            font-size: 28px;
+                            letter-spacing: 0.02em;
+                            text-shadow: 1px 1px 0 rgba(15, 82, 186, 0.1);
+                        ">#ViksitBharat2047</span>
+                        <svg viewBox="0 0 24 24" width="48" height="48" style="filter: drop-shadow(0 2px 4px rgba(0, 0, 102, 0.2));">
+                            <circle cx="12" cy="12" r="12" fill="#000066" opacity="0.85"/>
+                            <path d="M12 2l2.4 7.4h7.6l-6.2 4.5 2.4 7.4-6.2-4.5-6.2 4.5 2.4-7.4-6.2-4.5h7.6z" fill="white"/>
+                        </svg>
+                    </div>
+                </div>
+            `;
+            container.appendChild(captureCard);
+            
+            // Set the date
+            const dateElement = captureCard.querySelector('.achievement-date');
+            if (!dateElement) throw new Error('Date element not found');
+            
+            const currentDate = new Date().toLocaleDateString('en-IN', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            dateElement.textContent = currentDate;
+
+            // Clone the card and modify it for capture
+            const clonedCard = card.cloneNode(true);
+            document.body.appendChild(clonedCard);
+            clonedCard.style.position = 'fixed';
+            clonedCard.style.left = '-9999px';
+            clonedCard.style.top = '0';
+            clonedCard.style.opacity = '1';
+            clonedCard.style.transform = 'none';
+
+            // Add a small delay to ensure everything is rendered
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            // Wait for fonts and rendering
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            // Wait for a moment to ensure rendering
+            await new Promise(resolve => setTimeout(resolve, 500));
+            console.log('Starting canvas creation');
+
+            // Use html2canvas with optimal options
+            const canvas = await html2canvas(captureCard, {
+                backgroundColor: '#FFFFFF',
+                scale: 2, // Higher scale for better quality
+                logging: true, // Enable logging for debugging
+                width: 800,
+                height: 1000,
+                useCORS: true,
+                allowTaint: true,
+                onclone: (clonedDoc) => {
+                    console.log('Cloning document');
+                    const clonedElement = clonedDoc.querySelector('.achievement-date');
+                    if (clonedElement) {
+                        clonedElement.textContent = currentDate;
+                    }
+                },
+                x: 0,
+                y: 0,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: 800,
+                windowHeight: 1000
+            });
+            
+            console.log('Canvas created successfully');
+
+            // Clean up
+            document.body.removeChild(container);
+
+            // Remove the cloned element
+            document.body.removeChild(clonedCard);
+
+            try {
+                // Wait for a short time to ensure rendering
+                await waitForRender();
+
+                // Check if canvas is valid
+                if (!canvas || !canvas.toDataURL) {
+                    throw new Error('Invalid canvas generated');
+                }
+
+                console.log('Converting canvas to image');
+                
+                // Convert to image with better options
+                const image = canvas.toDataURL('image/png', 1.0);
+                
+                // Verify image data
+                if (!image || image === 'data:,') {
+                    throw new Error('Invalid image data generated');
+                }
+                
+                console.log('Image generated successfully');
+
+                // Create and trigger download
+                const link = document.createElement('a');
+                link.download = 'Changemaker-Badge-' + new Date().toISOString().split('T')[0] + '.png';
+                link.href = image;
+                document.body.appendChild(link);
+                
+                // Trigger download after a short delay
+                await new Promise(resolve => setTimeout(resolve, 100));
+                link.click();
+                
+                // Clean up
+                await new Promise(resolve => setTimeout(resolve, 100));
+                document.body.removeChild(link);
+
+                // Reset button with success message
+                downloadBtn.textContent = 'Downloaded!';
+                downloadBtn.disabled = false;
+                setTimeout(() => {
+                    downloadBtn.textContent = 'Download Achievement';
+                }, 2000);
+            } catch (error) {
+                throw new Error('Failed to create downloadable image: ' + error.message);
+            }
+        } catch (error) {
+            console.error('Failed to download achievement:', error);
+            
+            // Clean up any temporary elements
+            const container = document.querySelector('div[style*="-9999px"]');
+            if (container) {
+                document.body.removeChild(container);
+            }
+            
+            const downloadBtn = document.querySelector('.download-btn');
+            if (downloadBtn) {
+                downloadBtn.textContent = 'Error: ' + (error.message || 'Failed to download');
+                downloadBtn.disabled = false;
+                setTimeout(() => {
+                    downloadBtn.textContent = 'Download Achievement';
+                }, 3000);
+            }
+            
+            // Show error to user
+            alert('Failed to generate achievement image. Please try again. Error: ' + error.message);
+        } finally {
+            // Additional cleanup
+            const tempElements = document.querySelectorAll('div[style*="-9999px"]');
+            tempElements.forEach(el => el.remove());
+        }
+    }
+    </script>
+
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="assets/independence-theme.mp3.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script type="module">
+        document.addEventListener('DOMContentLoaded', () => {
+            const congratsModal = document.getElementById('congratsModal');
+            const closeModal = document.getElementById('closeModal');
+
+            // Function to reset game state
+            const resetGameState = () => {
+                localStorage.clear(); // Clear all game state
+                document.querySelectorAll('.completion-badge').forEach(badge => {
+                    badge.style.display = 'none';
+                });
+            };
+
+            // Function to start a new game session
+            const initNewGame = () => {
+                // Clear any existing game state
+                resetGameState();
+                
+                // Set initial game state
+                localStorage.setItem('completedLevels', JSON.stringify([]));
+                localStorage.setItem('gameStartTime', Date.now());
+            };
+
+            // Check if this is a new session (no game state or expired session)
+            const checkAndInitNewSession = () => {
+                const gameStartTime = localStorage.getItem('gameStartTime');
+                const currentTime = Date.now();
+                const SESSION_TIMEOUT = 30 * 60 * 1000; // 30 minutes in milliseconds
+
+                // Start new session if:
+                // 1. No game state exists
+                // 2. Session has expired
+                // 3. No completed levels array exists
+                if (!gameStartTime || 
+                    (currentTime - parseInt(gameStartTime)) > SESSION_TIMEOUT ||
+                    !localStorage.getItem('completedLevels')) {
+                    initNewGame();
+                    return true;
+                }
+                return false;
+            };
+
+            // Check completion status for each level
+            const checkCompletion = () => {
+                // Always check for new session first
+                if (checkAndInitNewSession()) {
+                    return; // Exit if this is a new session
+                }
+
+                const completedLevels = JSON.parse(localStorage.getItem('completedLevels') || '[]');
+                let completedCount = 0;
+                
+                document.querySelectorAll('.level-block').forEach((block, index) => {
+                    const levelNum = index + 1;
+                    const badge = block.querySelector('.completion-badge');
+                    
+                    if (completedLevels.includes(levelNum)) {
+                        badge.style.display = 'block';
+                        completedCount++;
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                });
+
+                // Show congratulations modal if all levels are completed
+                if (completedCount === 3 && !localStorage.getItem('congratsShown')) {
+                    congratsModal.classList.remove('hidden');
+                    localStorage.setItem('congratsShown', 'true');
+                    
+                    // Set current date in the achievement card
+                    const dateElement = document.querySelector('.achievement-date');
+                    const currentDate = new Date().toLocaleDateString('en-IN', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    });
+                    dateElement.textContent = currentDate;
+                    
+                    // Start 30 second countdown
+                    let timeLeft = 30;
+                    const timerElement = document.getElementById('resetTimer');
+                    const countdownInterval = setInterval(() => {
+                        timeLeft--;
+                        timerElement.textContent = timeLeft;
+                        
+                        if (timeLeft <= 0) {
+                            clearInterval(countdownInterval);
+                            congratsModal.classList.add('hidden');
+                            initNewGame(); // Start fresh game
+                            window.location.href = 'index.html';
+                        }
+                    }, 1000);
+                    
+                    // Auto-close modal after 30 seconds, reset game and redirect to index.html
+                    setTimeout(() => {
+                        congratsModal.classList.add('hidden');
+                        initNewGame(); // Start fresh game
+                        window.location.href = 'index.html';
+                    }, 30000);
+                }
+            };
+
+            // Close modal handler
+            closeModal.addEventListener('click', () => {
+                congratsModal.classList.add('hidden');
+                initNewGame(); // Start fresh game
+                window.location.href = 'index.html';
+            });
+
+            // Initialize game on first load
+            checkAndInitNewSession();
+
+            // Add click handlers to level buttons
+            document.querySelectorAll('.level-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const levelNum = btn.dataset.level;
+                    if (levelNum === '1') {
+                        window.location.href = 'level1.html';
+                    } else if (levelNum === '2') {
+                        window.location.href = 'vocal2.html';
+                    } else if (levelNum === '3') {
+                        window.location.href = 'level3.html';
+                    }
+                });
+            });
+
+            // Check completion status on page load
+            checkCompletion();
+            
+            // Recheck completion status when returning to the page
+            window.addEventListener('focus', checkCompletion);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Level 2 - Vocal for Local</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="vocal-new.css">
+    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/progress-new.js"></script>
+    <style>
+        .all-missions-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0F52BA;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(15, 82, 186, 0.3);
+            z-index: 100;
+        }
+
+        .all-missions-button:hover {
+            background: #0a3d8f;
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 4px 15px rgba(15, 82, 186, 0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="sound-control">
+            <button id="toggleSound" class="icon-btn">
+                <img src="assets/sound-off.svg" alt="Toggle Sound" id="soundIcon">
+            </button>
+        </div>
+        <div class="score-display">
+            <img src="assets/basket-icon.svg" alt="Basket" class="score-icon">
+            <span>Score:</span>
+            <span id="brandCount">0</span>
+            <span>/</span>
+            <span>3</span>
+        </div>
+        <div class="game-header">
+            <h1>Mission: Vocal for Local</h1>
+            <p class="mission-description">Support India's local brands and boost our economy! 🇮🇳</p>
+            <div class="game-instructions">
+                <h3>Instructions:</h3>
+                <ol>
+                    <li>Identify Indian brands from the collection below</li>
+                    <li>Use your mouse to drag Indian brands into the basket</li>
+                    <li>Drop them in the basket by releasing the mouse button</li>
+                    <li>Collect 3 Indian brands to complete the mission</li>
+                    <li>⚠️ Be careful! Global brands don't belong in the basket</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Main Game Area -->
+        <div class="game-area">
+            <div class="brands-grid" id="brandsGrid">
+                <!-- Brand images will be added here -->
+            </div>
+            
+            <div class="basket-container">
+                <div class="basket-title">Drop Indian Brands Here</div>
+                <div id="localBasket" class="basket-drop-zone">
+                    <img src="assets/basket.webp" alt="Local Basket" class="basket-image">
+                    <div class="basket-items"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Victory Overlay -->
+        <div id="victoryOverlay" class="victory-overlay">
+            <div class="victory-content">
+                <div class="victory-left">
+                    <div class="victory-badge">
+                        <div class="badge-header">
+                            <img src="assets/completed.svg" alt="Victory Badge" class="badge-icon">
+                            <h2>Congratulations! 🎉</h2>
+                        </div>
+                        <p class="badge-earned">You earned the "Voice for Local" Badge</p>
+                        <p class="mission-complete">Successfully promoted India's local brands!</p>
+                        <button id="nextLevel" class="continue-button">Continue</button>
+                    </div>
+                </div>
+                
+                <div class="victory-right">
+                    <div class="victory-info">
+                        <h3>Did you know?</h3>
+                        <p>
+                            India wants everyone to choose local electronics, clothes, and agritech to power small businesses and startups.
+                        </p>
+                        <a href="https://www.narendramodi.in/what-is-vocal-for-local-how-is-the-government-aiding-local-artisans-579458" 
+                           target="_blank" class="know-more">
+                           Learn more →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feedback Message -->
+        <div id="feedbackMessage" class="feedback-message hidden">
+            <span class="message-text"></span>
+        </div>
+
+        <!-- Show All Missions Button -->
+        <button class="all-missions-button" onclick="window.location.href='game.html'">
+            Show all Missions
+        </button>
+    </div>
+
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="assets/independence-theme.mp3.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Document loaded, initializing game...');
+            
+            let brands = [
+                { id: 'boat', type: 'local', image: './assets/boat.png' },
+                { id: 'lenskart', type: 'local', image: './assets/lenskart.png' },
+                { id: 'patanjali', type: 'local', image: './assets/patanjali.png' },
+                { id: 'tata', type: 'local', image: './assets/tata.png' },
+                { id: 'pg', type: 'global', image: './assets/P&G.png' },
+                { id: 'ms', type: 'global', image: './assets/ms.png' },
+                { id: 'toyota', type: 'global', image: './assets/toyota.png' }
+            ];
+            
+            // Shuffle brands array
+            brands = brands.sort(() => Math.random() - 0.5);
+            
+            const container = document.querySelector('#brandsGrid');
+            if (container) {
+                container.innerHTML = '';
+                
+                brands.forEach(brand => {
+                    console.log(`Creating brand: ${brand.id}, image: ${brand.image}`);
+                    
+                    const brandElement = document.createElement('div');
+                    brandElement.className = 'brand-item';
+                    brandElement.draggable = true;
+                    brandElement.dataset.id = brand.id;
+                    brandElement.dataset.type = brand.type;
+
+                    const img = document.createElement('img');
+                    img.src = brand.image;
+                    img.alt = brand.id;
+                    img.draggable = false;
+                    
+                    img.onerror = () => {
+                        console.error(`Failed to load image: ${brand.image}`);
+                        brandElement.style.backgroundColor = '#f0f0f0';
+                        brandElement.textContent = brand.id;
+                    };
+                    
+                    img.onload = () => {
+                        console.log(`Successfully loaded image: ${brand.image}`);
+                    };
+                    
+                    brandElement.appendChild(img);
+                    container.appendChild(brandElement);
+
+                    brandElement.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('text/plain', brand.id);
+                        brandElement.classList.add('dragging');
+                    });
+
+                    brandElement.addEventListener('dragend', () => {
+                        brandElement.classList.remove('dragging');
+                    });
+                });
+            }
+
+            // Setup drag and drop for basket
+            const basket = document.getElementById('localBasket');
+            const scoreDisplay = document.getElementById('brandCount');
+            let currentScore = 0;
+
+            function updateScore(newScore) {
+                currentScore = newScore;
+                if (scoreDisplay) {
+                    scoreDisplay.textContent = currentScore;
+                    scoreDisplay.parentElement.classList.remove('score-update');
+                    void scoreDisplay.parentElement.offsetWidth; // Trigger reflow
+                    scoreDisplay.parentElement.classList.add('score-update');
+                }
+            }
+
+            if (basket) {
+                basket.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    basket.classList.add('drag-over');
+                });
+
+                basket.addEventListener('dragleave', () => {
+                    basket.classList.remove('drag-over');
+                });
+                
+                basket.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    basket.classList.remove('drag-over');
+                    const brandId = e.dataTransfer.getData('text/plain');
+                    const brand = brands.find(b => b.id === brandId);
+                    const brandElement = document.querySelector(`[data-id="${brandId}"]`);
+                    
+                    if (brand && brand.type === 'local' && brandElement) {
+                        // Check if this brand is already in the basket
+                        const existingBrand = document.querySelector(`.basket-items [data-id="${brandId}"]`);
+                        if (!existingBrand) {
+                            const clone = brandElement.cloneNode(true);
+                            document.querySelector('.basket-items').appendChild(clone);
+                            
+                            // Increment and update score
+                            updateScore(currentScore + 1);
+                            
+                            // Play success sound or visual feedback
+                            brandElement.style.opacity = '0.5';
+                            brandElement.style.pointerEvents = 'none';
+                            
+                            // Check if game is complete
+                            if (currentScore >= 3) {
+                                setTimeout(() => {
+                                    // Update mission progress in localStorage
+                                    const missionProgress = JSON.parse(localStorage.getItem('missionProgress') || '{}');
+                                    if (!missionProgress.mission2) {
+                                        missionProgress.mission2 = true;
+                                        localStorage.setItem('missionProgress', JSON.stringify(missionProgress));
+                                    }
+
+                                    // Update progress tracker
+                                    if (window.progressTracker) {
+                                        window.progressTracker.missionStatus.mission2 = true;
+                                        window.progressTracker.updateProgress(2);
+                                        window.progressTracker.saveProgress();
+                                    }
+
+                                    // Mark level as completed
+                                    const completedLevels = JSON.parse(localStorage.getItem('completedLevels') || '[]');
+                                    if (!completedLevels.includes(2)) {
+                                        completedLevels.push(2);
+                                        localStorage.setItem('completedLevels', JSON.stringify(completedLevels));
+                                    }
+
+                                    // Set last completed mission
+                                    localStorage.setItem('lastCompletedMission', '2');
+                                    
+                                    // Show victory overlay
+                                    const overlay = document.getElementById('victoryOverlay');
+                                    overlay.style.display = 'flex';
+                                    setTimeout(() => {
+                                        overlay.style.opacity = '1';
+                                        overlay.classList.add('show');
+                                    }, 10);
+
+                                    // Setup continue button
+                                    const nextButton = document.getElementById('nextLevel');
+                                    if (nextButton) {
+                                        nextButton.addEventListener('click', () => {
+                                            window.location.href = 'game.html';
+                                        });
+                                    }
+                                }, 500);
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

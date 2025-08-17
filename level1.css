@@ -1,0 +1,442 @@
+.level-1 {
+    width: 100%;
+    height: 100vh;
+    background: #1a1a2e;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.score {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+
+.game-area {
+    width: 90%;
+    height: 450px;
+    position: relative;
+    background: #000033;
+    border-radius: 20px;
+    margin: 1rem auto;
+    overflow: hidden;
+    max-width: 800px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.score-block {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    color: #0066CC;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 1rem;
+    z-index: 10;
+}
+
+.game-space {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.game-header {
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.score {
+    color: white;
+    font-size: 1rem;
+}
+
+.back-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.monuments-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10%;
+    z-index: 1;
+    height: 180px;
+}
+
+.game-instructions {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+
+.monument {
+    width: 100px;
+    height: 150px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom center;
+    transition: all 0.3s;
+    opacity: 1;
+    image-rendering: -webkit-optimize-contrast; /* For webkit browsers */
+    image-rendering: crisp-edges; /* For other browsers */
+}
+
+.monument.damaged {
+    filter: brightness(50%) sepia(100%) saturate(10000%) hue-rotate(0deg);
+    transform: scale(0.95);
+    opacity: 0.7;
+}
+
+.india-gate {
+    background-image: url('assets/india-gate.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.taj-mahal {
+    background-image: url('assets/taj-mahal.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.red-fort {
+    background-image: url('assets/red-fort.png');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.chakra-launcher {
+    position: absolute;
+    bottom: 185px;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: move;
+    z-index: 2;
+    transform: translate(-50%, 0);
+    user-select: none;
+    background-color: transparent;
+}
+
+.game-area {
+    cursor: crosshair;
+}
+
+.chakra {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    transition: transform 0.3s ease;
+    display: block;
+}
+
+.chakra {
+    width: 100%;
+    height: 100%;
+    animation: spin 2s linear infinite;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+.chakra-projectile {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-image: url('assets/sudarshan-chakra.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.9));
+    z-index: 3;
+    pointer-events: none;
+    animation: spin 1s linear infinite;
+    transition: transform 0.1s ease-out;
+}
+
+.drone {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('assets/drone.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 2;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.3s ease;
+}
+
+.drone.falling {
+    animation: fall 4s linear forwards;
+    will-change: transform;
+}
+
+@keyframes fall {
+    0% { 
+        top: -50px;
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(20px);
+    }
+    75% {
+        transform: translateX(-20px);
+    }
+    100% { 
+        top: calc(100% - 200px);
+        transform: translateX(0);
+    }
+}
+
+.explosion {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, #ffeb3b 0%, #ff9800 50%, transparent 100%);
+    border-radius: 50%;
+    animation: explode 0.5s ease-out forwards;
+    z-index: 3;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+.drone.hit {
+    transform: scale(1.2);
+    opacity: 0;
+    transition: all 0.2s;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+@keyframes launch {
+    0% {
+        transform: scale(1.2) translateY(0);
+    }
+    100% {
+        transform: scale(1) translateY(-10px);
+    }
+}
+
+.launch-flash {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(255,215,0,0.8) 0%, rgba(255,215,0,0) 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: explode 0.2s ease-out forwards;
+    z-index: 1;
+}
+
+/* Responsive Design */
+
+
+
+
+@keyframes popupShow {
+    0% { opacity: 0; transform: scale(0.8); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.victory-popup {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    width: 90%;
+    animation: popIn 0.5s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.victory-title {
+    color: #0066CC;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.badge-info {
+    margin: 1.5rem 0;
+}
+
+.badge-title {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.badge-name {
+    color: #006400;
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+}
+
+.fact-box {
+    background: #f5f5f5;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+}
+
+.fact-title {
+    color: #333;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.fact-content {
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.read-more-link {
+    color: #0066CC;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+.read-more-link:hover {
+    text-decoration: underline;
+}
+
+.continue-btn {
+    background: #0066CC;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.continue-btn:hover {
+    background: #0052a3;
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .monuments-container {
+        padding: 0 5%;
+        bottom: 0;
+    }
+
+    .monument {
+        width: 90px;
+        height: 120px;
+    }
+
+    .chakra-launcher {
+        width: 40px;
+        height: 40px;
+        bottom: 130px;
+    }
+
+    .victory-popup {
+        width: 95%;
+        padding: 1.5rem;
+    }
+
+    .victory-title {
+        font-size: 1.8rem;
+    }
+}

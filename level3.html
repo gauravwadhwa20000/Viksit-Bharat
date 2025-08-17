@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mission 3 — PM Viksit Bharat Rozgaar Yojana</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="level3.css">
+    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/progress-new.js"></script>
+</head>
+<body>
+    <div class="level3-page">
+        <div class="sound-control" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <button id="toggleSound" class="icon-btn">
+                <img src="assets/sound-off.svg" alt="Toggle Sound" id="soundIcon">
+            </button>
+        </div>
+        <!-- Tricolor Background -->
+        <div class="tricolor-bg">
+            <div class="saffron-stripe"></div>
+            <div class="white-stripe"></div>
+            <div class="green-stripe"></div>
+        </div>
+
+        <!-- Heading Section -->
+        <header class="level-header" style="text-align:center; padding:1rem 0; position: relative; z-index: 2;">
+            <h1 style="color:#0066CC; font-size:2.2rem; font-weight:700; margin-bottom:1rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">PM Viksit Bharat Rozgaar Yojana</h1>
+            <div style="display: flex; justify-content: flex-start; align-items: center; max-width:800px; margin:0 auto; padding: 0 1rem;">
+                <strong style="color:#333; margin-right: 1rem;">How to Play:</strong>
+                <ol style="margin:0; padding:0 0 0 1.5rem; line-height:1.6; text-align:left;">
+                    <li style="color:#333;">Use LEFT and RIGHT arrow keys or move your mouse to move the character</li>
+                    <li style="color:#333;">Catch the falling job offers by moving under them</li>
+                    <li style="color:#333;">Collect 3 job offers to complete the mission</li>
+                    <li style="color:#333;">Help create employment opportunities across India!</li>
+                </ol>
+            </div>
+        </header>
+
+        <!-- Game Area Section -->
+        <section class="game-area">
+            <div class="score-block">
+                Jobs Collected: <span id="jobCount">0</span>/3
+            </div>
+
+            <!-- Game Space -->
+            <div class="game-space">
+                <!-- Job offers will fall here -->
+            </div>
+
+            <!-- Player Character -->
+            <div id="jobSeeker" class="job-seeker">
+                <img src="assets/man.png" alt="Job Seeker" class="seeker-image">
+            </div>
+            
+            <!-- Job items collected will appear here -->
+            <div class="collected-jobs"></div>
+        </section>
+    </div>
+
+    <!-- Victory Overlay Template -->
+    <div id="victoryOverlay" class="overlay" style="display: none;">
+        <div class="victory-popup">
+            <h2 class="victory-title">Congratulations! �</h2>
+            
+            <div class="badge-info">
+                <h3 class="badge-title">You've Earned</h3>
+                <div class="badge-name">"Youth Hire" Badge</div>
+                <div class="badge-image">🏆</div>
+            </div>
+            
+            <div class="fact-box">
+                <h4 class="fact-title">PM Viksit Bharat Rozgar Yojana</h4>
+                <p class="fact-content">₹1 lakh crore plan to create 3.5 crore jobs in 2 years and ₹15,000 support to youth hire for first private job.</p>
+                <a href="https://pmviksitbharatrozgaryojana.com/" class="read-more-link" target="_blank">
+                    PM Viksit Bharat Rozgar Yojana (PM-VBRY) - New Jobs Scheme from 1st August 2025 - सरकारी योजना
+                </a>
+            </div>
+            
+            <button class="continue-btn" onclick="window.location.href='game.html'">Continue</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" preload="auto" loop>
+        <source src="assets/independence-theme.mp3.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="scripts/levels/level3_new.js"></script>
+
+    <!-- Show All Missions Button -->
+    <button class="all-missions-button" onclick="window.location.href='game.html'">Show all Missions</button>
+</body>
+</html>
