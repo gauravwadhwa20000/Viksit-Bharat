@@ -1,0 +1,99 @@
+/* Mobile-specific styles for vocal2.html */
+@media screen and (max-width: 768px) {
+    .game-header {
+        padding: 1rem;
+    }
+
+    .game-header h1 {
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .game-instructions {
+        font-size: 0.9rem;
+    }
+
+    .game-instructions ol {
+        padding-left: 1.5rem;
+    }
+
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 1rem;
+        margin-bottom: 120px; /* Space for basket */
+    }
+
+    .brand-item {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1;
+        padding: 1rem;
+    }
+
+    .brand-item img {
+        max-width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .basket-container {
+        position: fixed;
+        bottom: 60px;
+        left: 0;
+        width: 100%;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .basket-title {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .basket-drop-zone {
+        height: 80px;
+        margin: 0 auto;
+        max-width: 300px;
+    }
+
+    .basket-image {
+        height: 60px;
+        object-fit: contain;
+    }
+
+    .score-display {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+    }
+
+    /* Better touch targets for draggable items */
+    .brand-item {
+        touch-action: none;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    .brand-item:active {
+        transform: scale(0.95);
+    }
+
+    /* Make basket drop zone more visible */
+    .basket-drop-zone.drag-over {
+        background: rgba(15, 82, 186, 0.1);
+        transform: scale(1.05);
+    }
+
+    .all-missions-button {
+        bottom: max(15px, env(safe-area-inset-bottom));
+    }
+}

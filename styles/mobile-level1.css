@@ -1,0 +1,62 @@
+/* Mobile-specific styles for level1.html */
+@media screen and (max-width: 768px) {
+    .level-header {
+        padding: 1rem !important;
+    }
+
+    .level-header h1 {
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+
+    .game-instructions {
+        padding: 0.5rem !important;
+    }
+
+    .game-area {
+        height: calc(100vh - 180px);
+        position: relative;
+    }
+
+    .chakra-launcher {
+        bottom: 120px; /* Adjusted position */
+    }
+
+    .chakra {
+        width: 60px !important; /* Larger chakra for mobile */
+        height: 60px !important;
+        transform-origin: center;
+    }
+
+    .monuments-container {
+        height: 100px;
+        bottom: 0;
+    }
+
+    .monument {
+        width: 80px;
+        height: 80px;
+    }
+
+    .score-block {
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 20px;
+    }
+
+    .all-missions-button {
+        bottom: max(15px, env(safe-area-inset-bottom));
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    /* Improve touch target for chakra */
+    .chakra-launcher {
+        padding: 20px;
+        margin: -20px;
+    }
+}
