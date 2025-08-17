@@ -1,0 +1,132 @@
+/* Reset for mobile */
+.mobile-body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+}
+
+.mobile-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* Game page specific */
+@media screen and (max-width: 768px) {
+    .game-page {
+        padding-bottom: 80px;
+    }
+
+    .levels-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        padding: 16px;
+    }
+
+    .level-block {
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    /* Fixed header */
+    .game-header-section {
+        position: sticky;
+        top: 0;
+        background: white;
+        z-index: 100;
+        padding: 16px !important;
+    }
+
+    /* Level 1 specific */
+    .level1-page .game-area {
+        height: calc(100vh - 150px);
+    }
+
+    .chakra-launcher {
+        bottom: 100px;
+    }
+
+    .chakra {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    /* Vocal2 specific */
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        padding: 16px;
+        margin-bottom: 150px;
+    }
+
+    .basket-container {
+        position: fixed;
+        bottom: 70px;
+    }
+
+    /* Common elements */
+    .all-missions-button {
+        position: fixed;
+        bottom: max(16px, env(safe-area-inset-bottom));
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 32px);
+        max-width: 300px;
+        height: 44px;
+        z-index: 1000;
+        border-radius: 22px;
+    }
+
+    /* Better touch targets */
+    button,
+    .clickable,
+    .play-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Prevent text selection */
+    * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        user-select: none;
+    }
+
+    /* Fix for iOS height */
+    @supports (-webkit-touch-callout: none) {
+        .mobile-body {
+            height: -webkit-fill-available;
+        }
+        .mobile-container {
+            height: -webkit-fill-available;
+        }
+    }
+}
+
+/* Fallback for desktop mode */
+@media screen and (min-width: 769px) {
+    .mobile-body {
+        position: static;
+        overflow: auto;
+    }
+    .mobile-container {
+        position: static;
+        overflow: visible;
+    }
+}

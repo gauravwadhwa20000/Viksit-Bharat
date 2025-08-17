@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2P1FDKVZ42"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2P1FDKVZ42');
+    </script>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Level 2 - Vocal for Local</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="vocal-new.css">
@@ -10,7 +19,8 @@
     <link rel="stylesheet" href="styles/mobile-common.css">
     <link rel="stylesheet" href="styles/mobile-vocal2.css">
     <script src="scripts/mobile-utils.js"></script>
-    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/desktop-mode.js"></script>
+    <script src="scripts/audio-controls.js"
     <script src="scripts/progress-new.js"></script>
     <style>
         .all-missions-button {
@@ -38,8 +48,8 @@
         }
     </style>
 </head>
-<body>
-    <div class="game-container">
+<body class="mobile-body">
+    <div class="game-container mobile-container">
         <div class="sound-control">
             <button id="toggleSound" class="icon-btn">
                 <img src="assets/sound-off.svg" alt="Toggle Sound" id="soundIcon">

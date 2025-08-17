@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-2P1FDKVZ42"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-2P1FDKVZ42');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Mission Viksit Bharat — Game Screen</title>
+    <link rel="stylesheet" href="styles/mobile-fix.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="updated-styles.css">
@@ -12,12 +22,13 @@
     <link rel="stylesheet" href="styles/mobile-common.css">
     <link rel="stylesheet" href="styles/mobile-game.css">
     <script src="scripts/mobile-utils.js"></script>
-    <script src="scripts/audio-controls.js"></script>
+    <script src="scripts/desktop-mode.js"></script>
+    <script src="scripts/audio-controls.js"
     <script src="scripts/progress-new.js"></script>
     <script src="scripts/levels/level1.js"></script>
 </head>
-<body>
-    <div class="game-page">
+<body class="mobile-body">
+    <div class="game-page mobile-container">
         <!-- Back to Home Button -->
         <button onclick="window.location.href='index.html'" class="back-home-btn">
             Back to Home

@@ -5,6 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Initialize the game when the document is loaded
 document.addEventListener('DOMContentLoaded', function() {
+    // Track level start
+    Analytics.trackLevelStart(2, 'Vocal for Local');
     console.log('Document loaded, initializing game...');
     new VocalForLocal();
 });
