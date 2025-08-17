@@ -1,41 +1,103 @@
 /* Mobile-specific styles for level1.html */
 @media screen and (max-width: 768px) {
+    .level1-page {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        overflow: hidden;
+        background: #000033;
+    }
+
     .level-header {
-        padding: 1rem !important;
+        padding: 0.5rem !important;
+        background: rgba(255, 255, 255, 0.95);
+        position: relative;
+        z-index: 10;
     }
 
     .level-header h1 {
-        font-size: 1.8rem !important;
+        font-size: 1.5rem !important;
         margin-bottom: 0.5rem !important;
+        color: #0066CC;
     }
 
     .game-instructions {
         padding: 0.5rem !important;
+        font-size: 0.9rem;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        margin: 0.5rem;
     }
 
     .game-area {
-        height: calc(100vh - 180px);
+        flex: 1;
         position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-bottom: 60px; /* Space for show all missions button */
+    }
+
+    .game-space {
+        flex: 1;
+        position: relative;
+        overflow: hidden;
     }
 
     .chakra-launcher {
-        bottom: 120px; /* Adjusted position */
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 5;
     }
 
     .chakra {
-        width: 60px !important; /* Larger chakra for mobile */
-        height: 60px !important;
+        width: 70px !important;
+        height: 70px !important;
         transform-origin: center;
+        filter: drop-shadow(0 0 10px rgba(255, 153, 51, 0.5));
     }
 
     .monuments-container {
-        height: 100px;
+        position: absolute;
         bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-end;
+        padding: 0 10px;
+        z-index: 1;
     }
 
     .monument {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
+        object-fit: contain;
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+    }
+
+    .score-block {
+        position: fixed;
+        top: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        color: #0066CC;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        z-index: 100;
     }
 
     .score-block {
